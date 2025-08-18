@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bird Watching Database</title>
+    <style>
+      body {
+        font-family: 'Courier New', Courier, monospace;
+        background-color: #202020;
+        color: #e0e0e0;
+      }
+      .gutters {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px 12px;
+      }
+      .header {
+        text-align: center;
+        padding: 20px;
+      }
+      .bird-card {
+        background-color: #303030;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+      .bird-card__header {
+        display: flex;
+        gap: 24px;
+        align-items: center;
+      }
+      .bird-card__binomial {
+        font-size: 12px;
+        color: #808080;
+      }
+    </style>
+</head>
+<body>
+  <div class="gutters">
+    <header class="header">
+      <h1>Bird Watching Database</h1>
+      <p>Discover, track, and manage your bird sightings. Whether you're a seasoned ornithologist or just starting your bird watching journey, this application helps you keep detailed records of your avian encounters.</p>
+    </header>
+    
+    <main>
+      <div th:each="bird: ${birds}" class="bird-card">
+        <div class="bird-card__header">
+          <h2 th:text="${bird.name}"></h2> 
+          <p class="bird-card__binomial" th:text="${bird.binomialName}"></p>
+        </div>
+        <p th:text="${bird.description}"></p>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
+
+

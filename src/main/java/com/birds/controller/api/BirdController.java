@@ -1,4 +1,4 @@
-package com.birds.controller;
+package com.birds.controller.api;
 
 import com.birds.entity.Bird;
 import com.birds.service.BirdService;
@@ -20,15 +20,8 @@ public class BirdController {
     // GET /api/birds - Get all birds or search by name
     @GetMapping
     public ResponseEntity<List<Bird>> getBirds(@RequestParam(required = false) String name) {
-        if (name != null && !name.trim().isEmpty()) {
-            // Search by name if provided
-            List<Bird> birds = birdService.searchBirdsByName(name);
-            return ResponseEntity.ok(birds);
-        } else {
-            // Get all birds if no name provided
-            List<Bird> birds = birdService.getAllBirds();
-            return ResponseEntity.ok(birds);
-        }
+        List<Bird> birds = birdService.getBirdsOrSearchByName(name);
+        return ResponseEntity.ok(birds);
     }
 
     // GET /api/birds/{id} - Get bird by ID

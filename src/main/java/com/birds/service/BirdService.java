@@ -30,6 +30,17 @@ public class BirdService {
         return birdRepository.findByNameContaining(name);
     }
     
+    // Get all birds or search by name if provided
+    public List<Bird> getBirdsOrSearchByName(String name) {
+        if (name != null && !name.trim().isEmpty()) {
+            // Search by name if provided
+            return searchBirdsByName(name);
+        } else {
+            // Get all birds if no name provided
+            return getAllBirds();
+        }
+    }
+    
     // Get total count of birds
     public long getTotalBirdCount() {
         return birdRepository.count();

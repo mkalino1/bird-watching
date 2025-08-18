@@ -1,4 +1,4 @@
-package com.birds.controller;
+package com.birds.controller.api;
 
 import java.util.concurrent.atomic.AtomicLong;
 
