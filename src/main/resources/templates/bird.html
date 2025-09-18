@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bird Watching Database - All Birds</title>
+    <title>Bird Watching Database</title>
     <link rel="stylesheet" href="/css/forest-theme.css">
 </head>
 <body>
@@ -13,20 +13,23 @@
       <p>Discover, track, and manage your bird sightings. Whether you're a seasoned ornithologist or just starting your bird watching journey, this application helps you keep detailed records of your avian encounters.</p>
     </header>
     
-    <main class="birds-grid">
-      <div th:each="bird: ${birds}" class="bird-card">
-        <div class="bird-card__header">
-          <div>
-            <h2 th:text="${bird.name}"></h2> 
-            <p class="bird-card__binomial" th:text="${bird.binomialName}"></p>
-          </div>
-          <a th:href="@{/bird/{id}(id=${bird.id})}" class="bird-link">View Details →</a>
+    <main>
+      <div class="bird-card">
+        <div th:if="${bird != null}" class="bird-card__header">
+          <h2 th:text="${bird.name}"></h2> 
+          <p class="bird-card__binomial" th:text="${bird.binomialName}"></p>
         </div>
         <p th:text="${bird.description}"></p>
+      </div>
+      <div th:if="${bird == null}" class="not-found">
+        <p>Bird not found</p>
+        <a href="/" class="back-link">← Back to All Birds</a>
+      </div>
+      
+      <div th:if="${bird != null}" style="text-align: center;">
+        <a href="/" class="back-link">← Back to All Birds</a>
       </div>
     </main>
   </div>
 </body>
 </html>
-
-
