@@ -45,14 +45,11 @@ public class Bird {
     @Column
     private LocalDateTime updatedAt;
 
-
-    // Pre-persist method to set creation timestamp
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
     }
     
-    // Pre-update method to set update timestamp
     @PreUpdate
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
