@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bird Watching Database - Recent Observations</title>
+    <link rel="stylesheet" href="/css/forest-theme.css">
+</head>
+<body>
+  <!-- TODO CLEAR ALL CSS -->
+  <div class="gutters">
+    <header class="header">
+      <h1>Bird Watching Database</h1>
+      <p>Discover, track, and manage your bird sightings. Whether you're a seasoned ornithologist or just starting your bird watching journey, this application helps you keep detailed records of your avian encounters.</p>
+    </header>
+    
+    <main class="observations-grid">
+      <div th:each="observation: ${observations}" class="observation-card">
+        <div class="observation-card__header">
+          <div class="observation-card__title-wrap">
+            <span class="observation-pill">Recent sighting</span>
+            <h2 th:text="${observation.bird.name}">Bird name</h2>
+            <p class="bird-card__binomial" th:text="${observation.bird.binomialName}">Bird binomial</p>
+          </div>
+          <a th:href="@{/bird/{id}(id=${observation.bird.id})}" class="bird-link">View Details →</a>
+        </div>
+
+        <div class="observation-meta">
+          <div class="meta-item">
+            <span class="meta-label">Date</span>
+            <strong th:text="${#temporals.format(observation.observationDate, 'dd MMM yyyy')}" class="meta-value">12 Sep 2026</strong>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Time</span>
+            <strong th:text="${#temporals.format(observation.observationDate, 'HH:mm')}" class="meta-value">08:45</strong>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Count</span>
+            <strong th:text="${observation.count}" class="meta-value">3</strong>
+          </div>
+        </div>
+
+        <div class="observation-details">
+          <div class="detail-block">
+            <span class="meta-label">Location</span>
+            <p class="meta-value meta-value--text" th:text="|${observation.latitude}, ${observation.longitude}|">51.5074, -0.1278</p>
+          </div>
+          <div class="detail-block" th:if="${observation.habitatType != null and !#strings.isEmpty(observation.habitatType)}">
+            <span class="meta-label">Habitat</span>
+            <p class="meta-value meta-value--text" th:text="${observation.habitatType}">Forest edge</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
+

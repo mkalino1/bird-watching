@@ -160,6 +160,120 @@ body {
   color: white;
 }
 
+.observations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px;
+  margin-top: 10px;
+}
+
+.observation-card {
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.96), rgba(15, 23, 42, 0.96));
+  padding: 24px 22px 20px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 14px 28px rgba(2, 6, 23, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.observation-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #10b981, #34d399, #a7f3d0 );
+}
+
+.observation-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 22px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.observation-card__title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.observation-pill {
+  display: inline-flex;
+  width: fit-content;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #d1fae5;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.28);
+}
+
+.observation-card__header h2 {
+  font-size: 1.6rem;
+  margin: 0;
+  color: #f8fafc;
+}
+
+.observation-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.meta-item,
+.detail-block {
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.meta-label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #a7f3d0;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.meta-value {
+  color: #f8fafc;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.meta-value--text {
+  margin: 0;
+  color: #dbeafe;
+}
+
+.observation-details {
+  display: grid;
+  gap: 14px;
+}
+
+@media (max-width: 768px) {
+  .observation-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .observation-meta {
+    grid-template-columns: 1fr;
+  }
+}
+
 .not-found {
   text-align: center;
   padding: 60px 20px;
