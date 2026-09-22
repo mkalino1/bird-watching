@@ -16,6 +16,6 @@ public class AllBirdsViewController {
   @GetMapping("/")
   public String allBirds(Model model) {
     model.addAttribute("birds", birdService.getAllBirds());
-    return "all-birds";
+    return "birds-all";
   }
 }

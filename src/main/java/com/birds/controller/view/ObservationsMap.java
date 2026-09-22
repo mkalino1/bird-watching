@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.birds.service.ObservationService;
 
 @Controller 
-public class RecentObservations {
+public class ObservationsMap {
 
   @Autowired
   ObservationService observationsService;
   
-  @GetMapping ("/recent")
+  @GetMapping ("/map")
   public String getRecentObservations(Model model) {
     model.addAttribute("observations", observationsService.getAllObservationsOrderedByDate());
-    return "recent-observations";
+    return "observations-map";
   }
 
 }

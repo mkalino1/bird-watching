@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bird Watching Database - Recent Observations</title>
+    <link rel="stylesheet" href="/css/forest-theme.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+    <script th:inline="javascript">
+        const observations = /*[[${observations}]]*/ [];
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const map = L.map('map');
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            const validPoints = [];
+
+            observations.forEach((observation) => {
+                const lat = Number(observation.latitude);
+                const lng = Number(observation.longitude);
+
+                if (isNaN(lat) || isNaN(lng)) {
+                    return;
+                }
+
+                const marker = L.marker([lat, lng]).addTo(map);
+                marker.bindPopup(
+                    '<b>' + observation.birdId + '</b><br>' +
+                    observation.count + ' observed on ' +
+                    new Date(observation.observationDate).toLocaleDateString()
+                );
+                validPoints.push([lat, lng]);
+            });
+
+            if (validPoints.length > 0) {
+                map.fitBounds(validPoints, { padding: [30, 30] });
+            } else {
+                map.setView([51.505, -0.09], 2);
+            }
+        });
+    </script>
+</head>
+<body>
+  <!-- TODO CLEAR ALL CSS -->
+  <div class="gutters">
+    <header class="header">
+      <h1>Bird Watching Database</h1>
+      <p>Discover, track, and manage your bird sightings. Whether you're a seasoned ornithologist or just starting your bird watching journey, this application helps you keep detailed records of your avian encounters.</p>
+    </header>
+    
+     <div id="map"></div>
+  </div>
+</body>
+</html>
+
